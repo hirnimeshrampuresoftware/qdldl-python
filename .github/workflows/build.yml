@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build_wheels:
-    name: Build wheel on ${{ matrix.os }}
+    name: Build wheel on ${{ matrix.os }}  for ${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -50,7 +50,7 @@ jobs:
         python -m pip install cibuildwheel
         python -m cibuildwheel --output-dir wheelhouse
     - name: Build source
-      if: startsWith(matrix.os, 'ubuntu')
+      if: startsWith(matrix.os, 'ubuntu' && matrix.arch, 'auto')
       run: |
         python setup.py sdist --dist-dir=wheelhouse
     - name: Release to pypi
