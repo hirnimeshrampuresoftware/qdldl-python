@@ -50,7 +50,7 @@ jobs:
         python -m pip install cibuildwheel
         python -m cibuildwheel --output-dir wheelhouse
     - name: Build source
-      if: startsWith(matrix.os, 'ubuntu' && matrix.arch, 'auto')
+      if: startsWith(matrix.os, 'ubuntu')
       run: |
         python setup.py sdist --dist-dir=wheelhouse
     - name: Release to pypi
